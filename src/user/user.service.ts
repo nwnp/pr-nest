@@ -27,4 +27,28 @@ export class UserService {
       },
     };
   }
+
+  detail(id) {
+    if (id === 1) {
+      return {
+        result: {
+          id: 1,
+          nickname: 'pa12',
+          email: 'ujmn0418@gmail.com',
+          address: 'Incheon',
+          role: 'admin',
+        },
+      };
+    } else {
+      return {
+        result: {
+          id: 2,
+          nickname: '걸레',
+          email: '예지@입보지.com',
+          address: 'Incheon',
+          role: '내 전용 좆집',
+        },
+      };
+    }
+  }
 }

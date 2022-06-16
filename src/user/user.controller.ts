@@ -1,6 +1,14 @@
 import { HttpExceptionFilter } from './../common/exceptions/http-exception.filter';
 import { UserService } from './user.service';
-import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UseFilters,
+} from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
@@ -15,5 +23,11 @@ export class UserController {
   @Post('signup')
   signup(@Body() userData: string): object {
     return this.userService.signup(userData);
+  }
+
+  @Post(':id')
+  detail(@Param('id', ParseIntPipe) id: number) {
+    console.log(typeof id);
+    return this.userService.detail(id);
   }
 }
