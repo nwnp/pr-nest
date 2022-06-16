@@ -1,8 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UserService {
   get(): object {
+    // test code
+    const temp = 1;
+    if (temp % 2 == 1) {
+      throw new ForbiddenException();
+    }
     return {
       result: {
         id: 1,
