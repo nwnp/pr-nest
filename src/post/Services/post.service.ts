@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { PostsRepository } from './../repository/posts.repository';
-import { Injectable, Type } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PostCreateDto } from '../dto/posts.create.dto';
 import { PostUpdateDto } from '../dto/post.update.dto';
 

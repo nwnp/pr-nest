@@ -17,7 +17,6 @@ import mongoose from 'mongoose';
     ConfigModule.forRoot(),
     AuthModule,
     PostModule,
-    UserModule,
     MongooseModule.forRoot(process.env.MONGO_URI),
   ],
   controllers: [AppController],
