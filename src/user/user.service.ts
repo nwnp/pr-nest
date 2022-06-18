@@ -4,7 +4,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 export class UserService {
   get(): object {
     // test code
-    const temp = 1;
+    const temp = 2;
     if (temp % 2 == 1) {
       throw new ForbiddenException();
     }
