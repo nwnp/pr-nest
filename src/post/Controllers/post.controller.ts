@@ -1,7 +1,18 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  UseFilters,
+} from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { PostCreateDto } from '../dto/posts.create.dto';
 import { PostService } from '../Services/post.service';
 
 @Controller('post')
+@UseFilters(HttpExceptionFilter)
 export class PostController {
   constructor(private readonly postsService: PostService) {}
 
@@ -11,8 +22,9 @@ export class PostController {
   }
 
   @Post('/create')
-  create() {
-    return this.postsService.create();
+  create(@Body() body: PostCreateDto) {
+    console.log(body);
+    return this.postsService.create(body);
   }
 
   @Get('/detail/:id')

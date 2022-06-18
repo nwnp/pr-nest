@@ -1,13 +1,19 @@
 import { Prop, Schema, SchemaFactory, SchemaOptions } from '@nestjs/mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 const options: SchemaOptions = {
   timestamps: true,
 };
 
 @Schema(options)
-export class Posts extends Document {
+export class Post extends Document {
+  @ApiProperty({
+    example: '제목',
+    description: 'title',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -15,6 +21,11 @@ export class Posts extends Document {
   @IsNotEmpty()
   title: string;
 
+  @ApiProperty({
+    example: '게시글 내용',
+    description: 'content',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -38,4 +49,4 @@ export class Posts extends Document {
   // user: Types.ObjectId
 }
 
-export const PostsSchema = SchemaFactory.createForClass(Posts);
+export const PostsSchema = SchemaFactory.createForClass(Post);
