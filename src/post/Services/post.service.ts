@@ -1,7 +1,8 @@
 import { Types } from 'mongoose';
 import { PostsRepository } from './../repository/posts.repository';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Type } from '@nestjs/common';
 import { PostCreateDto } from '../dto/posts.create.dto';
+import { PostUpdateDto } from '../dto/post.update.dto';
 
 @Injectable()
 export class PostService {
@@ -23,7 +24,7 @@ export class PostService {
     return this.postsRepository.delete(id);
   }
 
-  update() {
-    return '게시글 수정';
+  update(id: Types.ObjectId, body: PostUpdateDto) {
+    return this.postsRepository.update(id, body);
   }
 }

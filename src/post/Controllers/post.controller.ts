@@ -12,6 +12,7 @@ import {
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { PostCreateDto } from '../dto/posts.create.dto';
 import { PostService } from '../Services/post.service';
+import { PostUpdateDto } from '../dto/post.update.dto';
 
 @Controller('post')
 @UseFilters(HttpExceptionFilter)
@@ -39,7 +40,7 @@ export class PostController {
   }
 
   @Put('/update/:id')
-  update() {
-    return this.postsService.update();
+  update(@Param('id') id: Types.ObjectId, @Body() body: PostUpdateDto) {
+    return this.postsService.update(id, body);
   }
 }
