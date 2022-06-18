@@ -11,7 +11,6 @@ export class PostService {
   }
 
   create(body: PostCreateDto) {
-    const { title, content } = body;
     return this.postsRepository.create(body);
   }
 
