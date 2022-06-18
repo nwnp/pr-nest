@@ -1,8 +1,10 @@
+import { Types } from 'mongoose';
 import {
   Body,
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   UseFilters,
@@ -23,13 +25,12 @@ export class PostController {
 
   @Post('/create')
   create(@Body() body: PostCreateDto) {
-    console.log(body);
     return this.postsService.create(body);
   }
 
   @Get('/detail/:id')
-  detail() {
-    return this.postsService.detail();
+  detail(@Param('id') id: Types.ObjectId) {
+    return this.postsService.detail(id);
   }
 
   @Delete('/delete/:id')

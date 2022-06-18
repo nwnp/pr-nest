@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { PostsRepository } from './../repository/posts.repository';
 import { Injectable } from '@nestjs/common';
 import { PostCreateDto } from '../dto/posts.create.dto';
@@ -7,15 +8,15 @@ export class PostService {
   constructor(private readonly postsRepository: PostsRepository) {}
 
   getAll() {
-    return '모든 게시글을 반환';
+    return this.postsRepository.getAll();
   }
 
   create(body: PostCreateDto) {
     return this.postsRepository.create(body);
   }
 
-  detail() {
-    return '게시글 세부사항';
+  detail(id: Types.ObjectId) {
+    return this.postsRepository.detail(id);
   }
 
   remove() {
