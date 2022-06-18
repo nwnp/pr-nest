@@ -19,8 +19,8 @@ export class PostService {
     return this.postsRepository.detail(id);
   }
 
-  remove() {
-    return '게시글 삭제';
+  remove(id: Types.ObjectId) {
+    return this.postsRepository.delete(id);
   }
 
   update() {

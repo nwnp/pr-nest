@@ -17,10 +17,19 @@ export class PostsRepository {
   }
 
   async detail(id: Types.ObjectId) {
-    const post = await this.postModel.findById(id);
+    const post = await this.postModel.findById({ _id: id });
     if (!post) {
       throw new HttpException('존재하지 않는 게시글입니다.', 400);
     }
     return post;
+  }
+
+  async delete(id: Types.ObjectId) {
+    const post = await this.postModel.findById(id);
+    if (!post) {
+      throw new HttpException('존재하지 않는 게시글입니다.', 400);
+    }
+
+    return await this.postModel.deleteOne({ _id: id });
   }
 }

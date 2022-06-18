@@ -34,8 +34,8 @@ export class PostController {
   }
 
   @Delete('/delete/:id')
-  remove() {
-    return this.postsService.remove();
+  remove(@Param('id') id: Types.ObjectId) {
+    return this.postsService.remove(id);
   }
 
   @Put('/update/:id')
