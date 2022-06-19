@@ -10,14 +10,25 @@ import { UserSignupDto } from '../dto/user.signup.dto';
 export class UsersRepository {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
+  async findUserById(userId: string) {
+    try {
+      return await this.userModel.findById(userId).select('-password');
+    } catch (error) {
+      throw new HttpException('DB Error', 500);
+    }
+  }
+
   async signup(userData: UserSignupDto) {
-    return await this.userModel.create(userData);
+    try {
+      return await this.userModel.create(userData);
+    } catch (error) {
+      throw new HttpException('DB Error', 500);
+    }
   }
 
   async existByEmail(email: string) {
     try {
-      const result = await this.userModel.findOne({ email });
-      return result;
+      return await this.userModel.findOne({ email });
     } catch (error) {
       throw new HttpException('DB Error', 500);
     }

@@ -14,23 +14,6 @@ import { UserSignupDto } from '../dto/user.signup.dto';
 export class UserService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  get(): object {
-    // test code
-    const temp = 2;
-    if (temp % 2 == 1) {
-      throw new ForbiddenException();
-    }
-    return {
-      result: {
-        id: 1,
-        nickname: 'pa12',
-        email: 'ujmn0418@gmail.com',
-        address: 'Incheon',
-        role: 'admin',
-      },
-    };
-  }
-
   async signup(userData: UserSignupDto) {
     const { nickname, email, password, age, role } = userData;
     // 있는지 없는지 확인
@@ -74,5 +57,22 @@ export class UserService {
         },
       };
     }
+  }
+
+  get(): object {
+    // test code
+    const temp = 2;
+    if (temp % 2 == 1) {
+      throw new ForbiddenException();
+    }
+    return {
+      result: {
+        id: 1,
+        nickname: 'pa12',
+        email: 'ujmn0418@gmail.com',
+        address: 'Incheon',
+        role: 'admin',
+      },
+    };
   }
 }

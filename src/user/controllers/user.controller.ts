@@ -11,10 +11,14 @@ import {
 } from '@nestjs/common';
 import { UserSignupDto } from '../dto/user.signup.dto';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get()
   @UseFilters(new HttpExceptionFilter())
@@ -35,6 +39,6 @@ export class UserController {
 
   @Post('/auth/login')
   login(@Body() body: LoginRequestDto) {
-    return body;
+    return this.authService.jwtLogin(body);
   }
 }
