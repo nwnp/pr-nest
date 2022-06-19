@@ -1,5 +1,5 @@
-import { HttpExceptionFilter } from './../common/exceptions/http-exception.filter';
-import { UserService } from './user.service';
+import { HttpExceptionFilter } from './../../common/exceptions/http-exception.filter';
+import { UserService } from '../services/user.service';
 import {
   Body,
   Controller,
