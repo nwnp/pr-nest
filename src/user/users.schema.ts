@@ -1,6 +1,7 @@
-import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Document } from 'mongoose';
 
 @Schema()
 export class User extends Document {
@@ -9,6 +10,7 @@ export class User extends Document {
     description: '닉네임',
     required: true,
   })
+  @Prop({ required: true })
   @IsString()
   @IsNotEmpty()
   nickname: string;
@@ -18,6 +20,7 @@ export class User extends Document {
     description: '이메일',
     required: true,
   })
+  @Prop({ required: true })
   @IsEmail()
   @IsNotEmpty()
   email: string;
@@ -27,18 +30,27 @@ export class User extends Document {
     description: '패스워드',
     required: true,
   })
+  @Prop({ required: true })
   @IsString()
   @IsNotEmpty()
   password: string;
 
   @ApiProperty({
-    example: 29,
+    example: '29',
     description: '나이',
     required: true,
   })
-  @IsNumber()
+  @Prop({ required: true })
+  @IsString()
   @IsNotEmpty()
-  age: number;
+  age: string;
+
+  @ApiProperty({
+    example: 'admin',
+    description: '권한',
+  })
+  @IsString()
+  role: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(User);

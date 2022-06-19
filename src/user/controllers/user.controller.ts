@@ -9,6 +9,7 @@ import {
   Post,
   UseFilters,
 } from '@nestjs/common';
+import { UserSignupDto } from '../dto/user.signup.dto';
 
 @Controller('user')
 export class UserController {
@@ -20,9 +21,9 @@ export class UserController {
     return this.userService.get();
   }
 
-  @Post('signup')
-  signup(@Body() userData: string): object {
-    return this.userService.signup(userData);
+  @Post('/signup')
+  signup(@Body() body: UserSignupDto) {
+    return this.userService.signup(body);
   }
 
   @Post(':id')

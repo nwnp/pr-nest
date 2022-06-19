@@ -1,7 +1,19 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { UsersRepository } from './../repository/users.repository';
+import * as bcrypt from 'bcrypt';
+import {
+  ForbiddenException,
+  Injectable,
+  HttpException,
+  UseFilters,
+} from '@nestjs/common';
+import { UserSignupDto } from '../dto/user.signup.dto';
 
 @Injectable()
+@UseFilters(HttpExceptionFilter)
 export class UserService {
+  constructor(private readonly usersRepository: UsersRepository) {}
+
   get(): object {
     // test code
     const temp = 2;
@@ -19,13 +31,25 @@ export class UserService {
     };
   }
 
-  signup(userData): object {
-    return {
-      result: {
-        success: true,
-        ...userData,
-      },
-    };
+  async signup(userData: UserSignupDto) {
+    const { nickname, email, password, age, role } = userData;
+    // 있는지 없는지 확인
+    const isUserExist = await this.usersRepository.existByEmail(email);
+    if (isUserExist) {
+      throw new HttpException('이미 존재하는 이메일입니다.', 400);
+    }
+
+    const saltOrRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+    const user = await this.usersRepository.signup({
+      email,
+      nickname,
+      password: hashedPassword,
+      age,
+      role,
+    });
+
+    return user;
   }
 
   detail(id) {
