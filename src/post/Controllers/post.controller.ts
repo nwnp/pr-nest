@@ -15,7 +15,7 @@ import { PostService } from '../Services/post.service';
 import { PostUpdateDto } from '../dto/post.update.dto';
 
 @Controller('post')
-@UseFilters(HttpExceptionFilter)
+@UseFilters(HttpExceptionFilter) // 여기가 Exception을 위한
 export class PostController {
   constructor(private readonly postsService: PostService) {}
 

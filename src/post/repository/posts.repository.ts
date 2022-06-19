@@ -1,11 +1,13 @@
-import { Injectable, HttpException } from '@nestjs/common';
+import { Injectable, HttpException, UseFilters } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { PostUpdateDto } from '../dto/post.update.dto';
 import { PostCreateDto } from '../dto/posts.create.dto';
 import { Post } from '../posts.schema';
 
 @Injectable()
+@UseFilters(HttpExceptionFilter)
 export class PostsRepository {
   constructor(@InjectModel(Post.name) private postModel: Model<Post>) {}
 
