@@ -8,11 +8,13 @@ import {
   Post,
   Put,
   UseFilters,
+  UseGuards,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { PostCreateDto } from '../dto/posts.create.dto';
 import { PostService } from '../Services/post.service';
 import { PostUpdateDto } from '../dto/post.update.dto';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 
 @Controller('post')
 @UseFilters(HttpExceptionFilter) // 여기가 Exception을 위한
@@ -25,6 +27,7 @@ export class PostController {
   }
 
   @Post('/create')
+  @UseGuards(JwtAuthGuard)
   create(@Body() body: PostCreateDto) {
     return this.postsService.create(body);
   }

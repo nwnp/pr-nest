@@ -10,6 +10,7 @@ import {
   UseFilters,
 } from '@nestjs/common';
 import { UserSignupDto } from '../dto/user.signup.dto';
+import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 
 @Controller('user')
 export class UserController {
@@ -30,5 +31,10 @@ export class UserController {
   detail(@Param('id', ParseIntPipe) id: number) {
     console.log(typeof id);
     return this.userService.detail(id);
+  }
+
+  @Post('/auth/login')
+  login(@Body() body: LoginRequestDto) {
+    return body;
   }
 }

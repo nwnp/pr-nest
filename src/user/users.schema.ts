@@ -49,6 +49,7 @@ export class User extends Document {
     example: 'admin',
     description: '권한',
   })
+  @Prop()
   @IsString()
   role: string;
 }

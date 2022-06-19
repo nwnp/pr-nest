@@ -14,7 +14,7 @@ export class UsersRepository {
     return await this.userModel.create(userData);
   }
 
-  async existByEmail(email: string): Promise<object> {
+  async existByEmail(email: string) {
     try {
       const result = await this.userModel.findOne({ email });
       return result;
